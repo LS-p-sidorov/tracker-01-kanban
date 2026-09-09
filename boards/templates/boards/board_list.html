@@ -1,0 +1,24 @@
+{% extends "boards/base.html" %}
+{% block title %}Доски — Tracker 01{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Доски</h1>
+  {% if user.profile.is_manager %}
+    <a class="btn btn-primary" href="{% url 'board_create' %}">Создать доску</a>
+  {% endif %}
+</div>
+{% if boards %}
+  <ul class="board-list">
+    {% for board in boards %}
+      <li>
+        <a class="board-card" href="{% url 'board_detail' board.pk %}">
+          <strong>{{ board.title }}</strong>
+          <span class="muted">{{ board.tasks.count }} задач · {{ board.created_at|date:"d.m.Y" }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="muted">Досок пока нет.</p>
+{% endif %}
+{% endblock %}

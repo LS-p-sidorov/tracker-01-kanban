@@ -1,0 +1,27 @@
+{% extends "boards/base.html" %}
+{% block title %}Пользователи — Tracker 01{% endblock %}
+{% block content %}
+<h1>Пользователи и роли</h1>
+<table class="users-table">
+  <thead>
+    <tr><th>Пользователь</th><th>Роль</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for profile in profiles %}
+      <tr>
+        <td>{{ profile.user.username }}</td>
+        <td>
+          <form method="post" class="inline-form">
+            {% csrf_token %}
+            <input type="hidden" name="profile_id" value="{{ profile.pk }}">
+            <select name="role">
+              <option value="manager"{% if profile.role == 'manager' %} selected{% endif %}>Менеджер</option>
+              <option value="member"{% if profile.role == 'member' %} selected{% endif %}>Участник</option>
+            </select>
+        </td>
+        <td><button type="submit" class="btn btn-small">Сохранить</button></form></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

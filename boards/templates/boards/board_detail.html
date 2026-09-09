@@ -1,0 +1,45 @@
+{% extends "boards/base.html" %}
+{% block title %}{{ board.title }} — Tracker 01{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{{ board.title }}</h1>
+  <a class="btn btn-primary" href="{% url 'task_create' board.pk %}">Новая задача</a>
+</div>
+
+<div class="board">
+  {% for column in columns %}
+    <section class="column col-{{ column.value }}" data-status="{{ column.value }}">
+      <h2>{{ column.label }} <span class="count">{{ column.cards|length }}</span></h2>
+      <div class="cards">
+        {% for card in column.cards %}
+          <article
+            class="task-card{% if card.movable %} draggable{% endif %}"
+            draggable="{% if card.movable %}true{% else %}false{% endif %}"
+            data-task-id="{{ card.task.pk }}"
+          >
+            <strong>{{ card.task.title }}</strong>
+            {% if card.task.description %}<p class="desc">{{ card.task.description|linebreaksbr }}</p>{% endif %}
+            <div class="meta">
+              <span class="author">{{ card.task.author.username }}</span>
+              <span class="muted">{{ card.task.created_at|date:"d.m.Y" }}</span>
+            </div>
+            {% if card.movable %}
+              <form method="post" action="{% url 'task_move' card.task.pk %}" class="move-form">
+                {% csrf_token %}
+                <select name="status" class="status-select" aria-label="Сменить статус">
+                  {% for value, label in statuses %}
+                    <option value="{{ value }}"{% if value == column.value %} selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-small">Переместить</button>
+              </form>
+            {% endif %}
+          </article>
+        {% empty %}
+          <p class="muted empty-col">Пусто</p>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+</div>
+{% endblock %}

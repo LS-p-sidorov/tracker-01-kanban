@@ -1,0 +1,18 @@
+{% extends "boards/base.html" %}
+{% block title %}Новая доска — Tracker 01{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Новая доска</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <label class="field-label">{{ field.label }}
+        {{ field }}
+        {% for error in field.errors %}<span class="error">{{ error }}</span>{% endfor %}
+      </label>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Создать</button>
+    <a class="btn" href="{% url 'board_list' %}">Отмена</a>
+  </form>
+</div>
+{% endblock %}

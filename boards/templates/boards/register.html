@@ -1,0 +1,22 @@
+{% extends "boards/base.html" %}
+{% block title %}Регистрация — Tracker 01{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Регистрация</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <label class="field-label">{{ field.label }}
+        {{ field }}
+        {% for error in field.errors %}<span class="error">{{ error }}</span>{% endfor %}
+      </label>
+    {% endfor %}
+    {% if form.non_field_errors %}
+      <div class="error">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+  </form>
+  <p class="muted">Новый аккаунт получает роль «Участник».</p>
+  <p><a href="{% url 'login' %}">Уже есть аккаунт? Войти</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "boards/base.html" %}
+{% block title %}Новая задача — Tracker 01{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Новая задача в «{{ board.title }}»</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <label class="field-label">{{ field.label }}
+        {{ field }}
+        {% for error in field.errors %}<span class="error">{{ error }}</span>{% endfor %}
+      </label>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Создать задачу</button>
+    <a class="btn" href="{% url 'board_detail' board.pk %}">Отмена</a>
+  </form>
+</div>
+{% endblock %}

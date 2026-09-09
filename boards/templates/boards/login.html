@@ -1,0 +1,21 @@
+{% extends "boards/base.html" %}
+{% block title %}Вход — Tracker 01{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Вход</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <label class="field-label">{{ field.label }}
+        {{ field }}
+        {% for error in field.errors %}<span class="error">{{ error }}</span>{% endfor %}
+      </label>
+    {% endfor %}
+    {% if form.non_field_errors %}
+      <div class="error">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Войти</button>
+  </form>
+  <p><a href="{% url 'register' %}">Нет аккаунта? Регистрация</a></p>
+</div>
+{% endblock %}

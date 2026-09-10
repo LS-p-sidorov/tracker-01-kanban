@@ -49,6 +49,9 @@ Python · Django · PostgreSQL · HTML/CSS · JavaScript · Railway
 
 ## Локальный запуск
 
+<details>
+<summary>Инструкция по локальному запуску</summary>
+
 ```bash
 git clone https://github.com/petr-sidorov/tracker-kanban.git
 cd tracker-kanban
@@ -60,6 +63,8 @@ python manage.py runserver
 ```
 
 После запуска приложение доступно по адресу http://127.0.0.1:8000/
+
+</details>
 
 ## Развёртывание
 

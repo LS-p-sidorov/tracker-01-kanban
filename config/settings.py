@@ -1,5 +1,5 @@
 """
-Django settings for config project (Tracker 01 — Kanban Django MVP).
+Django settings for config project (Kanban Tracker — Kanban Django MVP).
 """
 
 import os

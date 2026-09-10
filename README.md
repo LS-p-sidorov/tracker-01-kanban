@@ -1,4 +1,4 @@
-# Tracker 01 — Kanban Django
+# Kanban Tracker — Kanban Django
 
 Минимальный MVP канбан-доски на Django: регистрация, роли (Менеджер/Участник), доски, задачи, перемещение задач (drag-and-drop + селектор статуса).
 

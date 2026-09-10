@@ -1,4 +1,4 @@
-# Tracker 01 — Kanban Django
+# Kanban Tracker — Kanban Django
 
 ## Цель
 

@@ -19,7 +19,7 @@ class Command(BaseCommand):
         member.save()
         Profile.objects.update_or_create(user=member, defaults={"role": Profile.Role.MEMBER})
 
-        board, _ = Board.objects.get_or_create(title="Демо-доска")
+        board, _ = Board.objects.get_or_create(title="Рабочая доска")
         Task.objects.get_or_create(
             board=board, title="Подготовить макет", author=manager,
             defaults={"status": Task.Status.TODO},
